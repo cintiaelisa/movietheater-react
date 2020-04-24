@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from "../../services/api";
+import { Link } from 'react-router-dom';
 
 import "./styles.css";
 
@@ -63,7 +64,7 @@ export default class Main extends Component {
                     <p>{movie.year}</p>
                     <p>{movie.genre}</p>
                     <p>{movie.description}</p>
-                    <a href="">Details</a>
+                    <Link to={`/movie/${movie.id}`}>Details</Link>
                 </article>
             ))}
             <div className="navigation">
