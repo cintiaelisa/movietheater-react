@@ -21,6 +21,28 @@ export default class Movie extends Component {
 
         this.setState({movie: response.data.data});
     }
+
+    deleteMovieHandler = event => {
+
+        event.preventDefault();
+
+        api.delete(`/movies/${this.state.movie.id}`).then(response => {
+           
+            if (response.status === 200) {
+                this.setState({ message: "Successfully deleted" });
+            }
+            
+            this.props.history.push('/')
+                       
+            console.log(response);
+        })
+        .catch(error => {
+
+            this.setState({ message: `${error}` });
+            console.log(error)
+        });
+    }
+
     render() {
 
         const { movie } = this.state;
@@ -34,8 +56,12 @@ export default class Movie extends Component {
                     <p>{movie.description}</p>
                     <strong>{movie.schedule}</strong>
                 </div>
+                <div>
+                    <p className="messages">{this.state.message}</p>
+                </div>
                 <div className="navigation">
                     <Link to={`/edit/${movie.id}`}>Edit</Link>
+                    <button type="button" onClick={this.deleteMovieHandler}>Delete</button>
                     <Link to={'/'}>Return</Link>
                 </div>
             </div>
