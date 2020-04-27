@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import api from "../../services/api";
 import { Link } from 'react-router-dom';
 import qs from 'qs';
-import "./styles.css";
 
-export default class Edit extends Component {
+export default class Create extends Component {
 
+    
     state = {
         movie: {
             id: '',
@@ -17,17 +17,6 @@ export default class Edit extends Component {
         },
         message: ''
         }
-    
-
-    async componentDidMount() {
-
-        const { id } = this.props.match.params;
-
-        const response = await api.get(`/movies/${id}`);
-
-        this.setState({movie: response.data.data});
-        
-    }
 
     submitHandler = event => {
 
@@ -35,8 +24,8 @@ export default class Edit extends Component {
 
         //console.log(qs.stringify(this.state.movie));
 
-        api(`/movies/${this.state.movie.id}`, {
-            method: 'patch',
+        api('/movies/', {
+            method: 'post',
             data: qs.stringify(this.state.movie),
             headers: {'content-type': 'application/x-www-form-urlencoded'}  
         })
