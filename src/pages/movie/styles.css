@@ -9,14 +9,56 @@
 
 .movie-info h1 {
     font-size: 32px;
+    margin-bottom: 10px;
 }
 
 .movie-info p{
-    color: #666666;
+    font-size: 16px;
+    color: #999;
+    margin-bottom: 5px;
     line-height: 24px;
-    margin-top: 5px;
 }
 
-.movie-info p a {
-    color: #006699;
+.navigation {
+    max-width: 700px;
+    margin: 20px auto 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.navigation a {
+    height: 42px;
+    width: 82px;
+    border-radius: 5px ;
+    border: 2px;
+    background: #da552f;
+    margin-top: 10px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.navigation button {
+    height: 42px;
+    width: 82px;
+    border-radius: 5px ;
+    border: 2px;
+    background: #da552f;
+    margin-top: 10px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
 }

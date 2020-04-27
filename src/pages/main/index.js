@@ -8,70 +8,59 @@ export default class Main extends Component {
 
     state = {
         movies: [],
-        productInfo: {},
-        page: 1,
+        search: '',
     }
 
     componentDidMount() {
         this.loadProducts();
     }
 
-    loadProducts = async ( page = 1) => {
+    loadProducts = async () => {
+        
         const response = await api.get(`/movies`);
 
         console.log(response.data);
 
-        this.setState({ movies: response.data.data, page });
+        this.setState({ movies: response.data.data });
 
-        console.log(this.state.movies.length);
+        //console.log(this.state.movies.length);
 
     }
 
-    prevPage = () => {
-
-        if(this.state.page === 1) return;
-
-        const pageNumber = this.state.page - 1;
-
-        this.loadProducts(pageNumber);
-    }
-
-    nextPage = () => {
-
-        if(this.state.page>=1) {
-
-        const pageNumber = this.state.page + 1;
-        this.loadProducts(pageNumber);
-
-        console.log(pageNumber);
-
-        }    
-        
+    updateSearch(event) {
+        this.setState({search: event.target.value.substr(0,20)});
+        //console.log(this.state.search);
     }
 
     render() {
 
         const { movies } = this.state;
 
+        let filteredMovies = this.state.movies.filter(
+            (movie) => {
+                return movie.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+            }                
+        );
+
         return (        
+        
+            <div className="movies-list">
+                
+                <h2> Movies in Theatres: {this.state.movies.length} </h2>
+                <div className="movie-search">
+                    Search: <input type="Text" value={this.state.search} onChange={this.updateSearch.bind(this)}/>                         
+                </div>
+                {filteredMovies.map(movie => (
+                    <article key={movie.id}>
+                        <strong>{movie.name}</strong>
+                        <p>{movie.year}</p>
+                        <p>{movie.genre}</p>
+                        <p>{movie.description}</p>
+                        <Link to={`/movie/${movie.id}`}>Details</Link>
+                    </article>
+                ))}
 
-        <div className="movies-list">
-            <h1> Quantidade de filmes em cartaz: {this.state.movies.length} </h1>
-
-            {movies.map(movie => (
-                <article key={movie.id}>
-                    <strong>{movie.name}</strong>
-                    <p>{movie.year}</p>
-                    <p>{movie.genre}</p>
-                    <p>{movie.description}</p>
-                    <Link to={`/movie/${movie.id}`}>Details</Link>
-                </article>
-            ))}
-            <div className="navigation">
-                <button disabled="true" onClick={this.prevPage}>Previous</button>
-                <button disabled="true" onClick={this.nextPage}>Next</button>
             </div>
-        </div>
     );
 
     }

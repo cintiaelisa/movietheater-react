@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
+
 import './styles.css';
+
 
 export default class Movie extends Component {
 
@@ -23,11 +26,18 @@ export default class Movie extends Component {
         const { movie } = this.state;
 
         return (
-            <div className="movie-info">
-                <h1>{movie.name}</h1>
-                <p>{movie.year}</p>
-                <p>{movie.genre}</p>
-                <p>{movie.description}</p>
+            <div className="movie-edit">
+                <div className="movie-info">
+                    <h1>{movie.name}</h1>
+                    <p>{movie.year}</p>
+                    <p>{movie.genre}</p>
+                    <p>{movie.description}</p>
+                    <strong>{movie.schedule}</strong>
+                </div>
+                <div className="navigation">
+                    <Link to={`/edit/${movie.id}`}>Edit</Link>
+                    <Link to={'/'}>Return</Link>
+                </div>
             </div>
         )
     
