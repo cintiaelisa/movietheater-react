@@ -77,8 +77,6 @@ export default class Edit extends Component {
 
     render() {
 
-        const { movie } = this.state;
-
         return (
             <div className="movie-edit">
                 <div className="movie-info">

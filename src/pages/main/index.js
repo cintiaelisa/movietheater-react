@@ -34,8 +34,6 @@ export default class Main extends Component {
 
     render() {
 
-        const { movies } = this.state;
-
         let filteredMovies = this.state.movies.filter(
             (movie) => {
                 return movie.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
